@@ -167,6 +167,8 @@ std::vector<vec2> regularize_segments(std::vector<Point_2> contour)
     }
 
     // Regularize the contour.
+
+#ifdef HAS_GUROBI
     RegularizePolygon rg;
 
     //compare our method with CGAL's method
@@ -181,6 +183,7 @@ std::vector<vec2> regularize_segments(std::vector<Point_2> contour)
     }
     //remove the collinear points
     std::vector<vec2> regularized_copy=regularized;
+
     std::vector<bool> check_linear(regularized.size(), false);
     for (int i = 0; i < regularized.size(); ++i)
     {
@@ -202,7 +205,9 @@ std::vector<vec2> regularize_segments(std::vector<Point_2> contour)
             regularized.push_back(regularized_copy[i]);
         }
     }
-
+#else
+    std::vector<vec2> regularized = regulaize_cgal(contour);
+#endif
     return regularized;
 }
 

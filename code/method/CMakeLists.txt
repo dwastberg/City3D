@@ -77,8 +77,8 @@ if (GUROBI_FOUND)
 else ()
     target_link_libraries(${PROJECT_NAME} basic math model renderer ${OpenCV_LIBS})
 	#TODO: allow to use another open-souce solver (to get rid of Gurobi)
-	message(FATAL_ERROR "The current implementation (the polygon regularization step) requires Gurobi. "
-						"Install Gurobi first, and then make sure the headers and libraries of Gurobi "
+	message(WARNING "The current implementation requires Gurobi for optimal performance. "
+						"If you want to use Gurobi, Install Gurobi first, and make sure the headers and libraries of Gurobi "
 						"can be found by CMake by specifying the paths of Gurobi in FindGUROBI.cmake. "
 						"Note: you also need to obtain a license to use Gurobi, which is free for academic use.")
 endif ()

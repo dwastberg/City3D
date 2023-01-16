@@ -3,8 +3,10 @@
 //
 #include "regularize_polygon.h"
 #include "dbscan.h"
-#include <gurobi_c++.h> //use gurobi as the solver
 
+#ifdef HAS_GUROBI
+#include <gurobi_c++.h> //use gurobi as the solver
+#endif
 
 std::vector<vec2> compute_all_directions(const std::vector<vec2> &polygon)
 {
@@ -65,6 +67,7 @@ std::vector<vec2> cluster_dirs(std::vector<vec2> all_dircs)
     return principal_dircs;
 }
 
+#ifdef HAS_GUROBI
 std::vector<vec2> RegularizePolygon::reg_ply(const std::vector<vec2> &polygon)
 {
 
@@ -243,3 +246,4 @@ std::vector<vec2> RegularizePolygon::optimize_polygon(const std::vector<vec2> &p
 
     return std::vector<vec2>();
 }
+#endif
